@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'comment.dart';
 
 void main() => runApp(NameGenApp());
 
@@ -22,7 +23,7 @@ class _NameGenHomeState extends State<NameGenHome> {
   String name = "";
   int level = 0;
   String mail = "";
-  List<String> comments = [];
+  List<Comment> comments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class _NameGenHomeState extends State<NameGenHome> {
             name = "Test name";
             level += 1;
             mail = "email@test.com";
-            comments.add('Test comment $level');
+            comments.add(Comment('Text comment', 'author'));
           });
         },
         child: Icon(Icons.add),
@@ -127,9 +128,15 @@ class _NameGenHomeState extends State<NameGenHome> {
               height: 30.0,
             ),
             Column(
-              children: comments.map((comment) => Text(comment)).toList(),
-              crossAxisAlignment: CrossAxisAlignment.start,
-              ),
+              children: comments.map((comment) => CommentCard(
+                comment: comment,
+                deleteFunction: () {
+                  setState(() {
+                    comments.remove(comment);
+                  });
+                },
+              )).toList(),
+            ),
           ],
         ),
       ),
