@@ -13,13 +13,35 @@ class NameGenApp extends StatelessWidget {
   }
 }
 
-class NameGenHome extends StatelessWidget {
+class NameGenHome extends StatefulWidget {
+  @override
+  _NameGenHomeState createState() => _NameGenHomeState();
+}
+
+class _NameGenHomeState extends State<NameGenHome> {
+  String name = "";
+  int level = 0;
+  String mail = "";
+  List<String> comments = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Name Genarator Tutorial"),
         centerTitle: true,
+        backgroundColor: Colors.grey[800],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            name = "Test name";
+            level += 1;
+            mail = "email@test.com";
+            comments.add('Test comment $level');
+          });
+        },
+        child: Icon(Icons.add),
         backgroundColor: Colors.grey[800],
       ),
       body: Padding(
@@ -49,7 +71,7 @@ class NameGenHome extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-              'Print Name',
+              '$name',
               style: TextStyle(
                 color: Colors.black,
                 letterSpacing: 2.0,
@@ -71,7 +93,7 @@ class NameGenHome extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-              'Print Level',
+              '$level',
               style: TextStyle(
                 color: Colors.black,
                 letterSpacing: 2.0,
@@ -92,7 +114,7 @@ class NameGenHome extends StatelessWidget {
                   width: 10.0,
                 ),
                 Text(
-                  'email@email.com',
+                  '$mail',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 15.0,
@@ -101,6 +123,13 @@ class NameGenHome extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Column(
+              children: comments.map((comment) => Text(comment)).toList(),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              ),
           ],
         ),
       ),
