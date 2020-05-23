@@ -7,3 +7,4 @@ Steps done:
 4. Converted stateless to stateful widget.
 5. Extracted comment list to separate dart file.
 6. Added delete comment function.
+7. Moved classes to packages.
